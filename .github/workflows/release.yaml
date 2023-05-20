@@ -14,3 +14,5 @@ jobs:
       - run: cmake -B build -DCMAKE_BUILD_TYPE=Release
       - run: cmake --build build
       - run: gh release create v${{ env.VERSION }} build/test
+        env:
+         GH_TOKEN: ${{ github.token }}
