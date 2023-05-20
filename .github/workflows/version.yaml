@@ -1,0 +1,12 @@
+name: Version
+on:
+  push:
+    branches:
+      - master
+jobs:
+  Ubuntu:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - run: echo "VERSION=$(git rev-list --no-merges --count HEAD)" >> $GITHUB_ENV
+      - run: echo ${{ env.VERSION }}
