@@ -1,0 +1,16 @@
+name: Release
+on:
+  push:
+    branches:
+      - master
+jobs:
+  Ubuntu:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      - run: echo "VERSION=0.0.$(git rev-list --no-merges --count HEAD)" >> $GITHUB_ENV
+      - run: cmake -B build -DCMAKE_BUILD_TYPE=Release
+      - run: cmake --build build
+      - run: gh release create v${{ env.VERSION }} build/test
