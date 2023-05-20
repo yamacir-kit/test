@@ -13,6 +13,6 @@ jobs:
       - run: echo "VERSION=0.0.$(git rev-list --no-merges --count HEAD)" >> $GITHUB_ENV
       - run: cmake -B build -DCMAKE_BUILD_TYPE=Release
       - run: cmake --build build
-      - run: gh release create v${{ env.VERSION }} build/test
+      - run: gh release create v${{ env.VERSION }} build/test --generate-notes
         env:
          GH_TOKEN: ${{ github.token }}
